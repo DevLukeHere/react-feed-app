@@ -12,6 +12,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Skeleton from "@mui/material/Skeleton";
 import Moment from "react-moment";
 import Grid from "@mui/material/Grid";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 const axios = require("axios");
 
 export default function PostCard() {
@@ -38,6 +39,11 @@ export default function PostCard() {
         setLoading(false);
       });
   }, []);
+
+  const handleClick = (event, slug) => {
+    console.log("event:", event);
+    console.log("slug:", slug);
+  };
 
   return (
     <>
@@ -94,8 +100,21 @@ export default function PostCard() {
                 }
               />
               <CardContent>
+                {post.tagList.length > 0
+                  ? post.tagList.map((tag, index) => {
+                      return (
+                        <Typography
+                          sx={{ ml: 1 }}
+                          key={index}
+                          variant="caption"
+                        >
+                          #{tag}
+                        </Typography>
+                      );
+                    })
+                  : null}
                 <Typography variant="body2" color="text.secondary">
-                  {post.body}
+                  {post.description}
                 </Typography>
               </CardContent>
               <CardActions disableSpacing>
@@ -103,6 +122,12 @@ export default function PostCard() {
                   <FavoriteIcon />
                 </IconButton>
                 <Typography variant="caption">{post.favoritesCount}</Typography>
+                <IconButton
+                  onClick={(event) => handleClick(event, post.slug)}
+                  aria-label="view post"
+                >
+                  <VisibilityIcon />
+                </IconButton>
               </CardActions>
             </Card>
           );
