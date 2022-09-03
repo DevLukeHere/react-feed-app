@@ -1,6 +1,4 @@
-import { Typography } from "@mui/material";
-import { Container } from "@mui/system";
-import * as React from "react";
+import { Typography, Container } from "@mui/material";
 import PostCard from "../components/PostCard";
 
 export default function Home() {
