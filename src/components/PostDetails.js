@@ -20,8 +20,6 @@ export default function PostDetails(props) {
     //
   }, []);
 
-  console.log("comments:", comments);
-
   return (
     <Fragment>
       <Container>
