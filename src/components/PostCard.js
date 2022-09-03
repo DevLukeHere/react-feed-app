@@ -13,12 +13,15 @@ import Skeleton from "@mui/material/Skeleton";
 import Moment from "react-moment";
 import Grid from "@mui/material/Grid";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import Tooltip from "@mui/material/Tooltip";
+import { useNavigate } from "react-router-dom";
 const axios = require("axios");
 
 export default function PostCard() {
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -26,7 +29,6 @@ export default function PostCard() {
       .get("https://api.realworld.io/api/articles?limit=10&offset=0")
       .then(function (response) {
         // handle success
-        console.log("response:", response);
         const posts = response.data.articles;
         setPosts(posts);
       })
@@ -36,13 +38,13 @@ export default function PostCard() {
         setError(error);
       })
       .then(function () {
+        // always executed
         setLoading(false);
       });
   }, []);
 
   const handleClick = (event, slug) => {
-    console.log("event:", event);
-    console.log("slug:", slug);
+    navigate(`/post/${slug}`);
   };
 
   return (
@@ -122,12 +124,14 @@ export default function PostCard() {
                   <FavoriteIcon />
                 </IconButton>
                 <Typography variant="caption">{post.favoritesCount}</Typography>
-                <IconButton
-                  onClick={(event) => handleClick(event, post.slug)}
-                  aria-label="view post"
-                >
-                  <VisibilityIcon />
-                </IconButton>
+                <Tooltip title="view post" placement="top" arrow>
+                  <IconButton
+                    onClick={(event) => handleClick(event, post.slug)}
+                    aria-label="view post"
+                  >
+                    <VisibilityIcon />
+                  </IconButton>
+                </Tooltip>
               </CardActions>
             </Card>
           );
