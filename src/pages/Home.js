@@ -1,12 +1,20 @@
-import { Typography, Container } from "@mui/material";
+import { Typography, Container, Grid } from "@mui/material";
 import PostCard from "../components/PostCard";
 
 export default function Home() {
   return (
     <div>
       <Container>
-        <Typography variant="h4">Homepage</Typography>
-        <PostCard />
+        <Grid container direction="column" alignContent="center">
+          <Grid item>
+            <Typography sx={{ textAlign: "center", mt: 2 }} variant="h4">
+              Feed
+            </Typography>
+          </Grid>
+          <Grid item>
+            <PostCard />
+          </Grid>
+        </Grid>
       </Container>
     </div>
   );
