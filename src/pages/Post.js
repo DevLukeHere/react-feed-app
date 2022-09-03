@@ -1,5 +1,6 @@
 import { Container, Typography, Grid } from "@mui/material";
 import { useEffect } from "react";
+import PostDetails from "../components/PostDetails";
 
 export default function Post() {
   useEffect(() => {
@@ -12,10 +13,12 @@ export default function Post() {
         <Grid container direction="column" alignContent="center">
           <Grid item>
             <Typography variant="h4" sx={{ textAlign: "center", mt: 2 }}>
-              Post
+              POST
             </Typography>
           </Grid>
-          <Grid item></Grid>
+          <Grid item>
+            <PostDetails />
+          </Grid>
         </Grid>
       </Container>
     </div>
