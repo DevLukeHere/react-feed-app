@@ -8,7 +8,7 @@ export default function Home() {
         <Grid container direction="column" alignContent="center">
           <Grid item>
             <Typography sx={{ textAlign: "center", mt: 2 }} variant="h4">
-              Feed
+              FEED
             </Typography>
           </Grid>
           <Grid item>
