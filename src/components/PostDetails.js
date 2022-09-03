@@ -11,6 +11,7 @@ import {
   Divider,
 } from "@mui/material";
 import { Fragment, useEffect } from "react";
+import CommentInput from "./CommentInput";
 
 export default function PostDetails(props) {
   const { post, loading, comments } = props;
@@ -22,7 +23,7 @@ export default function PostDetails(props) {
   console.log("comments:", comments);
 
   return (
-    <div>
+    <Fragment>
       <Container>
         {loading ? (
           <Skeleton variant="rectangular" width={400} height={50} />
@@ -53,6 +54,7 @@ export default function PostDetails(props) {
               <Typography variant="h6" sx={{ mt: 2 }}>
                 Comments
               </Typography>
+              <CommentInput />
             </Grid>
             <Grid item>
               <List sx={{ width: "100%", bgcolor: "background.paper" }}>
@@ -75,6 +77,6 @@ export default function PostDetails(props) {
           </Grid>
         )}
       </Container>
-    </div>
+    </Fragment>
   );
 }

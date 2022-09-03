@@ -1,17 +1,25 @@
-import { Typography, Container, Grid } from "@mui/material";
+import { Grid, TextField, IconButton } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import { Fragment } from "react";
 
 export default function CommentInput() {
   return (
-    <div>
-      <Container>
-        <Grid container direction="column" alignContent="center">
-          <Grid item>
-            <Typography sx={{ textAlign: "center", mt: 2 }} variant="h4">
-              COMMENT INPUT
-            </Typography>
-          </Grid>
+    <Fragment>
+      <Grid container alignItems="center" sx={{ mt: 2, mb: 2 }}>
+        <Grid item>
+          <TextField
+            id="outlined-textarea"
+            label="Comment"
+            placeholder="Comment here"
+            multiline
+          />
         </Grid>
-      </Container>
-    </div>
+        <Grid item>
+          <IconButton sx={{ ml: 2 }}>
+            <SendIcon />
+          </IconButton>
+        </Grid>
+      </Grid>
+    </Fragment>
   );
 }
