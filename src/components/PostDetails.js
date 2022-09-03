@@ -57,8 +57,8 @@ export default function PostDetails(props) {
             <Grid item>
               <List sx={{ width: "100%", bgcolor: "background.paper" }}>
                 {comments.map((comment) => (
-                  <>
-                    <ListItem alignItems="flex-start" key={comment.id}>
+                  <Fragment key={comment.id}>
+                    <ListItem alignItems="flex-start">
                       <ListItemAvatar>
                         <Avatar alt="user avatar" src={comment.author.image} />
                       </ListItemAvatar>
@@ -68,7 +68,7 @@ export default function PostDetails(props) {
                       />
                     </ListItem>
                     <Divider variant="inset" component="li" />
-                  </>
+                  </Fragment>
                 ))}
               </List>
             </Grid>
