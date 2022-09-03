@@ -37,7 +37,7 @@ export default function PostDetails(props) {
             <Grid item>
               <Typography
                 variant="subtitle1"
-                sx={{ textAlign: "center", mt: 2 }}
+                sx={{ textAlign: "center", mt: 2, fontStyle: "italic" }}
               >
                 {post.description}
               </Typography>
