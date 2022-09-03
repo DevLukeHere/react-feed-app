@@ -1,12 +1,25 @@
-import { Container, Typography, Grid, Skeleton } from "@mui/material";
-import { useEffect } from "react";
+import {
+  Container,
+  Typography,
+  Grid,
+  Skeleton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  Avatar,
+  ListItemText,
+  Divider,
+} from "@mui/material";
+import { Fragment, useEffect } from "react";
 
 export default function PostDetails(props) {
-  const { post, loading } = props;
+  const { post, loading, comments } = props;
 
   useEffect(() => {
     //
   }, []);
+
+  console.log("comments:", comments);
 
   return (
     <div>
@@ -17,7 +30,7 @@ export default function PostDetails(props) {
           <Grid container direction="column" alignContent="center">
             <Grid item>
               <Typography variant="h5" sx={{ textAlign: "center", mt: 2 }}>
-                {post.title} by
+                {post.title}
               </Typography>
             </Grid>
             <Grid item>
@@ -35,6 +48,29 @@ export default function PostDetails(props) {
               >
                 {post.body}
               </Typography>
+            </Grid>
+            <Grid item>
+              <Typography variant="h6" sx={{ mt: 2 }}>
+                Comments
+              </Typography>
+            </Grid>
+            <Grid item>
+              <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+                {comments.map((comment) => (
+                  <>
+                    <ListItem alignItems="flex-start" key={comment.id}>
+                      <ListItemAvatar>
+                        <Avatar alt="user avatar" src={comment.author.image} />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={comment.author.username}
+                        secondary={<Fragment>{comment.body}</Fragment>}
+                      />
+                    </ListItem>
+                    <Divider variant="inset" component="li" />
+                  </>
+                ))}
+              </List>
             </Grid>
           </Grid>
         )}
