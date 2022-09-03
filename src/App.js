@@ -1,4 +1,3 @@
-import "./App.css";
 import Home from "./pages/Home";
 import Post from "./pages/Post";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
