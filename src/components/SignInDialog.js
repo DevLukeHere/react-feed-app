@@ -17,9 +17,6 @@ export default function SignInDialog() {
   const { signIn, error, loading } = useSignIn();
 
   const handleClick = () => {
-    console.log("email:", email);
-    console.log("password:", password);
-
     signIn(email, password);
   };
 
@@ -69,8 +66,12 @@ export default function SignInDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClick}>Sign In</Button>
+          <Button disabled={loading ? true : false} onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button disabled={loading ? true : false} onClick={handleClick}>
+            Sign In
+          </Button>
         </DialogActions>
         {error && <Typography variant="caption">{error}</Typography>}
       </Dialog>
