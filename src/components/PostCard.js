@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useEffect, useState, Fragment } from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Moment from "react-moment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import {
@@ -15,6 +14,7 @@ import {
   Typography,
   Skeleton,
   Grid,
+  Chip,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 const axios = require("axios");
@@ -95,11 +95,6 @@ export default function PostCard() {
                     alt={post.author.username}
                   />
                 }
-                action={
-                  <IconButton aria-label="settings">
-                    <MoreVertIcon />
-                  </IconButton>
-                }
                 title={`${post.title} by ${post.author.username}`}
                 subheader={
                   <Moment format="DD/MM/YYYY">{post.createdAt}</Moment>
@@ -109,13 +104,14 @@ export default function PostCard() {
                 {post.tagList.length > 0
                   ? post.tagList.map((tag, index) => {
                       return (
-                        <Typography
-                          sx={{ ml: 1 }}
+                        <Chip
+                          sx={{ m: 0.5 }}
+                          variant="outlined"
                           key={index}
-                          variant="caption"
-                        >
-                          #{tag}
-                        </Typography>
+                          label={`#${tag}`}
+                          size="small"
+                          color="primary"
+                        />
                       );
                     })
                   : null}
