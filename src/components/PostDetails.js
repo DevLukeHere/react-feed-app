@@ -28,13 +28,22 @@ export default function PostDetails(props) {
   }, []);
 
   const handleDelete = (id) => {
+    console.log("id:", id);
+
     axios
       .delete(
-        `https://api.realworld.io/api/articles/${post.slug}/comments/${id}`
+        `https://api.realworld.io/api/articles/${post.slug}/comments/${id}`,
+        {
+          headers: {
+            authorization: `Bearer ${user.token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
       )
       .then(function (response) {
         // handle success
-        console.log("delete:", response.data);
+        console.log("delete:", response);
         dispatch({ type: "DELETE_COMMENT", payload: response.data });
       })
       .catch(function (error) {
@@ -102,9 +111,7 @@ export default function PostDetails(props) {
                           primary={comment.author.username}
                           secondary={<Fragment>{comment.body}</Fragment>}
                         />
-                        <IconButton
-                          onClick={(event) => handleDelete(event, comment.id)}
-                        >
+                        <IconButton onClick={() => handleDelete(comment.id)}>
                           <DeleteIcon />
                         </IconButton>
                       </ListItem>
