@@ -66,14 +66,18 @@ export default function SignInDialog() {
           />
         </DialogContent>
         <DialogActions>
-          <Button disabled={loading ? true : false} onClick={handleClose}>
+          <Button disabled={loading} onClick={handleClose}>
             Cancel
           </Button>
-          <Button disabled={loading ? true : false} onClick={handleClick}>
+          <Button disabled={loading} onClick={handleClick}>
             Sign In
           </Button>
         </DialogActions>
-        {error && <Typography variant="caption">{error}</Typography>}
+        {error && (
+          <Typography variant="caption" sx={{ color: "red" }}>
+            {error}
+          </Typography>
+        )}
       </Dialog>
     </Fragment>
   );
