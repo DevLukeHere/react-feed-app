@@ -1,19 +1,21 @@
 import * as React from "react";
 import { useEffect, useState, Fragment } from "react";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Avatar from "@mui/material/Avatar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Skeleton from "@mui/material/Skeleton";
 import Moment from "react-moment";
-import Grid from "@mui/material/Grid";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import Tooltip from "@mui/material/Tooltip";
+import {
+  Tooltip,
+  Card,
+  CardHeader,
+  CardActions,
+  CardContent,
+  Avatar,
+  IconButton,
+  Typography,
+  Skeleton,
+  Grid,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 const axios = require("axios");
 
@@ -47,7 +49,7 @@ export default function PostCard() {
     navigate(`/post/${slug}`);
   };
 
-  console.log("error:", error)
+  console.log("error:", error);
 
   return (
     <Fragment>

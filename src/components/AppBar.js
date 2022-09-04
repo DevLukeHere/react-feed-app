@@ -18,6 +18,7 @@ import {
   Menu,
 } from "@mui/material";
 import { useSignOut } from "../hooks/useSignOut";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -65,6 +66,7 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const { signOut } = useSignOut();
+  const { user } = useAuthContext();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -186,10 +188,13 @@ export default function PrimarySearchAppBar() {
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <SignInDialog />
-            <Button onClick={handleSignOut} sx={{ color: "#ffffff" }}>
-              Sign Out
-            </Button>
+            {user ? (
+              <SignInDialog />
+            ) : (
+              <Button onClick={handleSignOut} sx={{ color: "#ffffff" }}>
+                Sign Out
+              </Button>
+            )}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
