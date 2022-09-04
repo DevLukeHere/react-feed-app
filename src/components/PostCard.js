@@ -47,6 +47,8 @@ export default function PostCard() {
     navigate(`/post/${slug}`);
   };
 
+  console.log("error:", error)
+
   return (
     <Fragment>
       {loading ? (

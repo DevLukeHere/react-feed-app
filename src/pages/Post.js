@@ -48,6 +48,8 @@ export default function Post() {
       });
   }, [slug]);
 
+  console.log("error:", error)
+
   return (
     <div>
       <Container>
