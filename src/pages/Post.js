@@ -47,6 +47,7 @@ export default function Post() {
       .then(function () {
         // always executed
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   console.log("error:", error);

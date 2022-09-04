@@ -9,9 +9,12 @@ export default function CommentInput(props) {
   const { post } = props;
   const { dispatch } = useCommentsContext();
   const [comment, setComment] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [slug, setSlug] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const { user } = useAuthContext();
 
   const handleClick = () => {
