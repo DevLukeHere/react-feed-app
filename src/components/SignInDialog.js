@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -18,9 +18,13 @@ export default function SignInDialog() {
   };
 
   return (
-    <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open form dialog
+    <Fragment>
+      <Button
+        variant="outlined"
+        onClick={handleClickOpen}
+        sx={{ color: "#ffffff" }}
+      >
+        Sign In
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Sign In</DialogTitle>
@@ -49,6 +53,6 @@ export default function SignInDialog() {
           <Button onClick={handleClose}>Sign In</Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </Fragment>
   );
 }
