@@ -8,6 +8,12 @@ export const commentsReducer = (state, action) => {
       return { comments: action.payload };
     case "CREATE_COMMENTS":
       return { comments: [action.payload, ...state.comments] };
+    case "DELETE_COMMENT":
+      return {
+        comments: state.comments.filter(
+          (comment) => comment.id !== action.payload.id
+        ),
+      };
     default:
       return state;
   }
