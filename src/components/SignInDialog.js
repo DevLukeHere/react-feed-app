@@ -1,19 +1,26 @@
 import { useState, Fragment } from "react";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
+import { useSignIn } from "../hooks/useSignIn";
+import {
+  Typography,
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from "@mui/material";
 
 export default function SignInDialog() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { signIn, error, loading } = useSignIn();
 
   const handleClick = () => {
     console.log("email:", email);
     console.log("password:", password);
+
+    signIn(email, password);
   };
 
   const handleClickOpen = () => {
@@ -65,6 +72,7 @@ export default function SignInDialog() {
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleClick}>Sign In</Button>
         </DialogActions>
+        {error && <Typography variant="caption">{error}</Typography>}
       </Dialog>
     </Fragment>
   );
