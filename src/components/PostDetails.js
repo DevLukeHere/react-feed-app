@@ -12,9 +12,11 @@ import {
 } from "@mui/material";
 import { Fragment, useEffect } from "react";
 import CommentInput from "./CommentInput";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function PostDetails(props) {
   const { post, loading, comments } = props;
+  const { user } = useAuthContext();
 
   useEffect(() => {
     //
@@ -52,7 +54,13 @@ export default function PostDetails(props) {
               <Typography variant="h6" sx={{ mt: 2 }}>
                 Comments
               </Typography>
-              <CommentInput />
+              {user ? (
+                <CommentInput />
+              ) : (
+                <Typography variant="subtitle2" sx={{ color: "red" }}>
+                  Please sign in to comment on post
+                </Typography>
+              )}
             </Grid>
             <Grid item>
               <List sx={{ width: "100%", bgcolor: "background.paper" }}>
