@@ -189,11 +189,11 @@ export default function PrimarySearchAppBar() {
           </Box>
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {user ? (
-              <SignInDialog />
-            ) : (
               <Button onClick={handleSignOut} sx={{ color: "#ffffff" }}>
                 Sign Out
               </Button>
+            ) : (
+              <SignInDialog />
             )}
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
