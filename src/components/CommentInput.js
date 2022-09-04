@@ -14,19 +14,28 @@ export default function CommentInput(props) {
   const [slug, setSlug] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [error, setError] = useState("");
-  // eslint-disable-next-line no-unused-vars
   const { user } = useAuthContext();
 
   const handleClick = () => {
     setLoading(true);
     axios
-      .post(`https://api.realworld.io/api/articles/${slug}/comments`, {
-        comment: { body: comment },
-      })
+      .post(
+        `https://api.realworld.io/api/articles/${slug}/comments`,
+        {
+          comment: { body: comment },
+        },
+        {
+          headers: {
+            authorization: `Bearer ${user.token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then(function (response) {
         // handle success
-        const comment = response;
-        console.log("comment:", comment);
+        const comment = response.data.comment;
+        console.log("comment:", response);
         dispatch({ type: "CREATE_COMMENTS", payload: comment });
         setLoading(false);
         setComment("");
@@ -44,7 +53,6 @@ export default function CommentInput(props) {
 
   useEffect(() => {
     setSlug(post.slug);
-    // console.log("user.token:", user.token)
   }, [post.slug]);
 
   return (
