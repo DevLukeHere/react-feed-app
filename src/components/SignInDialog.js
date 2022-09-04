@@ -8,6 +8,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 export default function SignInDialog() {
   const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleClick = () => {
+    console.log("email:", email);
+    console.log("password:", password);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -15,6 +22,8 @@ export default function SignInDialog() {
 
   const handleClose = () => {
     setOpen(false);
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -26,7 +35,7 @@ export default function SignInDialog() {
       >
         Sign In
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={open}>
         <DialogTitle>Sign In</DialogTitle>
         <DialogContent>
           <TextField
@@ -37,6 +46,8 @@ export default function SignInDialog() {
             type="email"
             fullWidth
             variant="standard"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
           />
           <TextField
             autoFocus
@@ -46,11 +57,13 @@ export default function SignInDialog() {
             type="password"
             fullWidth
             variant="standard"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Sign In</Button>
+          <Button onClick={handleClick}>Sign In</Button>
         </DialogActions>
       </Dialog>
     </Fragment>
