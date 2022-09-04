@@ -2,12 +2,13 @@ import { Container, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import PostDetails from "../components/PostDetails";
 import { useParams } from "react-router-dom";
+import { useCommentsContext } from "../hooks/useCommentsContext";
 const axios = require("axios");
 
 export default function Post() {
   const { slug } = useParams();
+  const { dispatch } = useCommentsContext();
   const [post, setPost] = useState({});
-  const [comments, setComments] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -32,11 +33,11 @@ export default function Post() {
       });
 
     axios
-      .get(` https://api.realworld.io/api/articles/${slug}/comments`)
+      .get(`https://api.realworld.io/api/articles/${slug}/comments`)
       .then(function (response) {
         // handle success
         const comments = response.data.comments;
-        setComments(comments);
+        dispatch({ type: "SET_COMMENTS", payload: comments });
       })
       .catch(function (error) {
         // handle error
@@ -48,14 +49,14 @@ export default function Post() {
       });
   }, [slug]);
 
-  console.log("error:", error)
+  console.log("error:", error);
 
   return (
     <div>
       <Container>
         <Grid container direction="column" alignContent="center">
           <Grid item>
-            <PostDetails post={post} loading={loading} comments={comments} />
+            <PostDetails post={post} loading={loading} />
           </Grid>
         </Grid>
       </Container>

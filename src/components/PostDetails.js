@@ -13,9 +13,11 @@ import {
 import { Fragment, useEffect } from "react";
 import CommentInput from "./CommentInput";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useCommentsContext } from "../hooks/useCommentsContext";
 
 export default function PostDetails(props) {
-  const { post, loading, comments } = props;
+  const { post, loading } = props;
+  const { comments } = useCommentsContext();
   const { user } = useAuthContext();
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export default function PostDetails(props) {
                 Comments
               </Typography>
               {user ? (
-                <CommentInput />
+                <CommentInput post={post} />
               ) : (
                 <Typography variant="subtitle2" sx={{ color: "red" }}>
                   Please sign in to comment on post
