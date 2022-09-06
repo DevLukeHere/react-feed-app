@@ -144,7 +144,7 @@ export default function PostDetails(props) {
             )}
             {comments ? (
               <Grid item>
-                <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+                <List sx={{ width: "100%", bgcolor: "#f5f5f5" }}>
                   {comments.map((comment) => (
                     <Fragment key={comment.id}>
                       <ListItem alignItems="flex-start">
@@ -158,9 +158,11 @@ export default function PostDetails(props) {
                           primary={comment.author.username}
                           secondary={<Fragment>{comment.body}</Fragment>}
                         />
-                        <IconButton onClick={() => handleDelete(comment.id)}>
-                          <DeleteIcon />
-                        </IconButton>
+                        {user && (
+                          <IconButton onClick={() => handleDelete(comment.id)}>
+                            <DeleteIcon />
+                          </IconButton>
+                        )}
                       </ListItem>
                       <Divider variant="inset" component="li" />
                     </Fragment>
