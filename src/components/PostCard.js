@@ -21,12 +21,14 @@ const axios = require("axios");
 
 export default function PostCard() {
   const [posts, setPosts] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
+    setError({});
+
     axios
       .get("https://api.realworld.io/api/articles?limit=10&offset=0")
       .then(function (response) {
@@ -36,7 +38,6 @@ export default function PostCard() {
       })
       .catch(function (error) {
         // handle error
-        console.log("error:", error);
         setError(error);
       })
       .then(function () {
@@ -49,10 +50,15 @@ export default function PostCard() {
     navigate(`/post/${slug}`);
   };
 
-  console.log("error:", error);
-
   return (
     <Fragment>
+      {error && (
+        <Grid>
+          <Typography variant="caption" sx={{ color: "red" }}>
+            {error.message}
+          </Typography>
+        </Grid>
+      )}
       {loading ? (
         <Grid container direction="column" gap={4}>
           <Grid item>

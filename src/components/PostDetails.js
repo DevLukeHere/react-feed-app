@@ -45,7 +45,6 @@ export default function PostDetails(props) {
       .catch(function (error) {
         // handle error
         setError(error);
-        console.log("error:", error);
       })
       .then(function () {
         // always executed
