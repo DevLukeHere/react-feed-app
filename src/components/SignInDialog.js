@@ -52,6 +52,7 @@ export default function SignInDialog() {
             variant="standard"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
+            disabled={loading}
           />
           <TextField
             autoFocus
@@ -63,6 +64,7 @@ export default function SignInDialog() {
             variant="standard"
             onChange={(e) => setPassword(e.target.value)}
             value={password}
+            disabled={loading}
           />
         </DialogContent>
         <DialogActions>
@@ -75,7 +77,7 @@ export default function SignInDialog() {
         </DialogActions>
         {error && (
           <Typography variant="caption" sx={{ color: "red" }}>
-            {error}
+            {error.message}
           </Typography>
         )}
       </Dialog>
