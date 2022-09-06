@@ -46,7 +46,7 @@ export default function PostCard() {
       });
   }, []);
 
-  const handleClick = (event, slug) => {
+  const handleClick = (slug) => {
     navigate(`/post/${slug}`);
   };
 
@@ -132,7 +132,7 @@ export default function PostCard() {
                 <Typography variant="caption">{post.favoritesCount}</Typography>
                 <Tooltip title="view post" placement="top" arrow>
                   <IconButton
-                    onClick={(event) => handleClick(event, post.slug)}
+                    onClick={() => handleClick(post.slug)}
                     aria-label="view post"
                   >
                     <VisibilityIcon />
