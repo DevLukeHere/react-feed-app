@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import PostDetails from "../components/PostDetails";
 import { useParams } from "react-router-dom";
@@ -9,11 +9,13 @@ export default function Post() {
   const { slug } = useParams();
   const { dispatch } = useCommentsContext();
   const [post, setPost] = useState({});
-  const [error, setError] = useState("");
+  const [error, setError] = useState({});
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
+    setError({})
+
     axios
       .get(`https://api.realworld.io/api/articles/${slug}`)
       .then(function (response) {
@@ -24,7 +26,6 @@ export default function Post() {
       })
       .catch(function (error) {
         // handle error
-        console.log("error:", error);
         setError(error);
       })
       .then(function () {
@@ -41,16 +42,13 @@ export default function Post() {
       })
       .catch(function (error) {
         // handle error
-        console.log("error:", error);
         setError(error);
       })
       .then(function () {
         // always executed
       });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
-
-  console.log("error:", error);
 
   return (
     <div>
@@ -59,6 +57,13 @@ export default function Post() {
           <Grid item>
             <PostDetails post={post} loading={loading} />
           </Grid>
+          {error && (
+            <Grid item>
+              <Typography variant="caption" sx={{ color: "red" }}>
+                {error.message}
+              </Typography>
+            </Grid>
+          )}
         </Grid>
       </Container>
     </div>
