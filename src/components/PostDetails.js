@@ -134,7 +134,10 @@ export default function PostDetails(props) {
             </Grid>
             {error && (
               <Grid item>
-                <Typography variant="caption" sx={{ textAlign: "center", mt: 2, color: "red" }}>
+                <Typography
+                  variant="caption"
+                  sx={{ textAlign: "center", mt: 2, color: "red" }}
+                >
                   {error.message}
                 </Typography>
               </Grid>

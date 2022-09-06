@@ -14,7 +14,7 @@ export default function Post() {
 
   useEffect(() => {
     setLoading(true);
-    setError({})
+    setError({});
 
     axios
       .get(`https://api.realworld.io/api/articles/${slug}`)
