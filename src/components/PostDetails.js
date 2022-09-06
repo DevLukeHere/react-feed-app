@@ -12,7 +12,7 @@ import {
   IconButton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Fragment, useEffect } from "react";
+import { Fragment, useState } from "react";
 import CommentInput from "./CommentInput";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useCommentsContext } from "../hooks/useCommentsContext";
@@ -22,13 +22,10 @@ export default function PostDetails(props) {
   const { post, loading } = props;
   const { comments, dispatch } = useCommentsContext();
   const { user } = useAuthContext();
-
-  useEffect(() => {
-    //
-  }, []);
+  const [error, setError] = useState({});
 
   const handleDelete = (id) => {
-    console.log("id:", id);
+    setError({});
 
     axios
       .delete(
@@ -43,11 +40,11 @@ export default function PostDetails(props) {
       )
       .then(function (response) {
         // handle success
-        console.log("delete:", response);
         dispatch({ type: "DELETE_COMMENT", payload: response.data });
       })
       .catch(function (error) {
         // handle error
+        setError(error);
         console.log("error:", error);
       })
       .then(function () {
@@ -59,7 +56,48 @@ export default function PostDetails(props) {
     <Fragment>
       <Container>
         {loading ? (
-          <Skeleton variant="rectangular" width={400} height={50} />
+          <Grid container direction="column" alignContent="center">
+            <Grid item>
+              <Skeleton
+                variant="rectangular"
+                width={500}
+                height={25}
+                sx={{ margin: "1rem" }}
+              />
+            </Grid>
+            <Grid item>
+              <Skeleton
+                variant="rectangular"
+                width={500}
+                height={25}
+                sx={{ margin: "1rem" }}
+              />
+            </Grid>
+            <Grid item>
+              <Skeleton
+                variant="rectangular"
+                width={500}
+                height={25}
+                sx={{ margin: "1rem" }}
+              />
+            </Grid>
+            <Grid item>
+              <Skeleton
+                variant="rectangular"
+                width={500}
+                height={25}
+                sx={{ margin: "1rem" }}
+              />
+            </Grid>
+            <Grid item>
+              <Skeleton
+                variant="rectangular"
+                width={400}
+                height={50}
+                sx={{ margin: "1rem" }}
+              />
+            </Grid>
+          </Grid>
         ) : (
           <Grid container direction="column" alignContent="center">
             <Grid item>
@@ -95,6 +133,13 @@ export default function PostDetails(props) {
                 </Typography>
               )}
             </Grid>
+            {error && (
+              <Grid item>
+                <Typography variant="caption" sx={{ textAlign: "center", mt: 2, color: "red" }}>
+                  {error.message}
+                </Typography>
+              </Grid>
+            )}
             {comments ? (
               <Grid item>
                 <List sx={{ width: "100%", bgcolor: "background.paper" }}>
