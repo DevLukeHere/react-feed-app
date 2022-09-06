@@ -22,7 +22,7 @@ export const useSignIn = () => {
         // handle success
         const user = response.data.user;
 
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(user)); // store user object to local storage after logging in
         dispatch({ type: "LOGIN", payload: user });
         setLoading(false);
       })
