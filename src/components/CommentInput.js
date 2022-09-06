@@ -1,4 +1,4 @@
-import { Grid, TextField, IconButton } from "@mui/material";
+import { Grid, TextField, IconButton, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import { Fragment, useEffect, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -9,15 +9,14 @@ export default function CommentInput(props) {
   const { post } = props;
   const { dispatch } = useCommentsContext();
   const [comment, setComment] = useState("");
-  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const [slug, setSlug] = useState("");
-  // eslint-disable-next-line no-unused-vars
-  const [error, setError] = useState("");
+  const [error, setError] = useState({});
   const { user } = useAuthContext();
 
   const handleClick = () => {
     setLoading(true);
+    setError({});
     axios
       .post(
         `https://api.realworld.io/api/articles/${slug}/comments`,
@@ -35,14 +34,13 @@ export default function CommentInput(props) {
       .then(function (response) {
         // handle success
         const comment = response.data.comment;
-        console.log("comment:", response);
+
         dispatch({ type: "CREATE_COMMENTS", payload: comment });
         setLoading(false);
         setComment("");
       })
       .catch(function (error) {
         // handle error
-        console.log("error:", error);
         setError(error);
       })
       .then(function () {
@@ -67,12 +65,20 @@ export default function CommentInput(props) {
             onChange={(e) => setComment(e.target.value)}
             value={comment}
             size="small"
+            disabled={loading}
           />
         </Grid>
         <Grid item>
-          <IconButton sx={{ ml: 2 }} onClick={handleClick}>
+          <IconButton disabled={loading} sx={{ ml: 2 }} onClick={handleClick}>
             <SendIcon />
           </IconButton>
+        </Grid>
+        <Grid item>
+          {error && (
+            <Typography variant="caption" sx={{ color: "red" }}>
+              {error.message}
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </Fragment>
