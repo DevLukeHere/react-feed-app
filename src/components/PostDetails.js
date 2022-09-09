@@ -16,6 +16,7 @@ import { Fragment, useState } from "react";
 import CommentInput from "./CommentInput";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useCommentsContext } from "../hooks/useCommentsContext";
+// eslint-disable-next-line no-unused-vars
 const axios = require("axios");
 
 export default function PostDetails(props) {
