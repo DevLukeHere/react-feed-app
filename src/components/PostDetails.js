@@ -24,31 +24,35 @@ export default function PostDetails(props) {
   const { user } = useAuthContext();
   const [error, setError] = useState({});
 
-  const handleDelete = (id) => {
+  const handleDelete = (id, comment) => {
     setError({});
 
-    axios
-      .delete(
-        `https://api.realworld.io/api/articles/${post.slug}/comments/${id}`,
-        {
-          headers: {
-            authorization: `Bearer ${user.token}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then(function (response) {
-        // handle success
-        dispatch({ type: "DELETE_COMMENT", payload: response.data });
-      })
-      .catch(function (error) {
-        // handle error
-        setError(error);
-      })
-      .then(function () {
-        // always executed
-      });
+    dispatch({ type: "DELETE_COMMENT", payload: comment }); // Temporarily delete comment on local state
+
+    // DELETE endpoint is not returning the list of comments from a user
+
+    // axios
+    //   .delete(
+    //     `https://api.realworld.io/api/articles/${post.slug}/comments/${id}`,
+    //     {
+    //       headers: {
+    //         authorization: `Bearer ${user.token}`,
+    //         Accept: "application/json",
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   )
+    //   .then(function (response) {
+    //     // handle success
+    //     dispatch({ type: "DELETE_COMMENT", payload: response.data });
+    //   })
+    //   .catch(function (error) {
+    //     // handle error
+    //     setError(error);
+    //   })
+    //   .then(function () {
+    //     // always executed
+    //   });
   };
 
   return (
@@ -158,8 +162,10 @@ export default function PostDetails(props) {
                           primary={comment.author.username}
                           secondary={<Fragment>{comment.body}</Fragment>}
                         />
-                        {user && (
-                          <IconButton onClick={() => handleDelete(comment.id)}>
+                        {user && user.username === comment.author.username && (
+                          <IconButton
+                            onClick={() => handleDelete(comment.id, comment)}
+                          >
                             <DeleteIcon />
                           </IconButton>
                         )}
